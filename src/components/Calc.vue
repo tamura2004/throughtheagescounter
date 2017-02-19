@@ -1,10 +1,28 @@
 <template lang="pug">
 .container
+  mixin btn(num)
+    .btn.btn-secondary(@click="value = Number(value + '#{num}')") #{num}
+    
   .row
-    .col-sm-3
-      router-link.btn.btn-warning(to="/")
-        p.card-text 文化ポイント
-        h4.card-title {{users[0].science.current}}
+    button.btn.btn-secondary.btn-wide(type="button") {{value}}
+  .row
+    .col-xs-1
+      each num in [7,8,9]
+        +btn(num)
+      button.btn.btn-warning(type="button" v-on:click="value = 0") C
+    .col-xs-1
+      each num in [4,5,6]
+        +btn(num)
+      button.btn.btn-warning(type="button" v-on:click="value = 0") -
+    .col-xs-1
+      each num in [1,2,3]
+        +btn(num)
+      button.btn.btn-warning(type="button" v-on:click="value = 0") +
+    .col-xs-1
+      +btn(0)
+      +btn("")
+      +btn("")
+      button.btn.btn-warning(type="button" v-on:click="value = 0") =
 
 </template>
 
@@ -13,20 +31,7 @@ export default {
   name: 'calc',
   data () {
     return {
-      users: [
-        {
-          name: '田村',
-          color: 'btn-danger',
-          science: {
-            current: 0,
-            increase: 1
-          },
-          culture: {
-            current: 0,
-            increase: 0
-          }
-        }
-      ]
+      value: 0
     }
   }
 }
@@ -34,7 +39,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
+.btn
+  margin 4px
+  width 100px
+  height 100px
+  font-size 72px
 
+.btn-wide
+  width 424px
 h1, h2
   font-weight normal
 

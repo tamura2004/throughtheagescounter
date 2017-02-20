@@ -1,23 +1,22 @@
 <template lang="pug">
-  button.btn.btn-block(:class="user.color")
+  button.btn.btn-block(
+    :class="'btn-'+user.color",
+    @click="EDIT_NUMBER({userKey: userKey, valueKey: valueKey})"
+  )
     p {{ valueNames[valueKey] }}
     h2 {{ user.values[valueKey] }}
 
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-// import router from '../router'
+import { mapGetters, mapActions } from 'vuex'
+import { EDIT_NUMBER } from '../vuex/mutation-types'
 
 export default {
   name: 'pointPanel',
   computed: mapGetters(['users', 'valueNames']),
-  props: ['user', 'valueKey']
-  // methods: {
-  //   move () {
-  //     router.push('/calc')
-  //   }
-  // }
+  methods: mapActions([EDIT_NUMBER]),
+  props: ['user', 'userKey', 'valueKey']
 }
 </script>
 

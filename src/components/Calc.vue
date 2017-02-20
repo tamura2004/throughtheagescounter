@@ -1,7 +1,8 @@
 <template lang="pug">
   .container
     table
-      tr: td(colspan=3): h1 {{ number }}
+      tr: td(colspan=4)
+        .btn.btn-default {{ edit.number }}
       tr
         td: NumBtn(num="9")
         td: NumBtn(num="8")
@@ -30,13 +31,15 @@ import AddBtn from './AddBtn'
 export default {
   name: 'calc',
   components: { NumBtn, ClrBtn, AddBtn },
-  computed: mapGetters(['number'])
+  computed: mapGetters(['users', 'edit'])
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
-
+.btn
+  font-size 32px
+  text-align center
 // .d-flex
 //   width 350px
 

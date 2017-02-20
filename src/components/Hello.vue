@@ -1,39 +1,31 @@
 <template lang="pug">
 .container
   .row
-    .col-sm-3
-      .btn.btn-primary(@click="move")
-        p.card-text 科学ポイント
-        h4.card-title {{users[0].science.current}}
+    .col(v-for="(user, index) in users")
+      button.btn.btn-block(:class="user.color")
+        h4 {{ user.name }}
+      hr
+
+      PointPanel(
+        v-for="(point,key) in user.values",
+        :user="user",
+        :valueKey="key"
+      )
 
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import router from '../router'
+import PointPanel from './PointPanel'
 
 export default {
   name: 'hello',
+  computed: mapGetters(['users']),
+  components: { PointPanel },
   methods: {
     move () {
       router.push('/calc')
-    }
-  },
-  data () {
-    return {
-      users: [
-        {
-          name: '田村',
-          color: 'btn-danger',
-          science: {
-            current: 0,
-            increase: 1
-          },
-          culture: {
-            current: 0,
-            increase: 0
-          }
-        }
-      ]
     }
   }
 }
@@ -41,16 +33,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
-
-h1, h2
-  font-weight normal
-
-ul
-  list-style-type none
-  padding 0
-
-li
-  display inline-block
-  margin 0 20px
-
+.col
+  border solid 0px black
 </style>

@@ -1,61 +1,43 @@
 <template lang="pug">
-.container
-  mixin btn(num)
-    .btn.btn-secondary(@click="value = Number(value + '#{num}')") #{num}
-    
-  .row
-    button.btn.btn-secondary.btn-wide(type="button") {{value}}
-  .row
-    .col-xs-1
-      each num in [7,8,9]
-        +btn(num)
-      button.btn.btn-warning(type="button" v-on:click="value = 0") C
-    .col-xs-1
-      each num in [4,5,6]
-        +btn(num)
-      button.btn.btn-warning(type="button" v-on:click="value = 0") -
-    .col-xs-1
-      each num in [1,2,3]
-        +btn(num)
-      button.btn.btn-warning(type="button" v-on:click="value = 0") +
-    .col-xs-1
-      +btn(0)
-      +btn("")
-      +btn("")
-      button.btn.btn-warning(type="button" v-on:click="value = 0") =
+  .container
+    table
+      tr: td(colspan=3): h1 {{ number }}
+      tr
+        td: NumBtn(num="9")
+        td: NumBtn(num="8")
+        td: NumBtn(num="7")
+        td: ClrBtn
+      tr
+        td: NumBtn(num="6")
+        td: NumBtn(num="5")
+        td: NumBtn(num="4")
+        td: AddBtn
+      tr
+        td: NumBtn(num="3")
+        td: NumBtn(num="2")
+        td: NumBtn(num="1")
+      tr
+        td: NumBtn(num="0" colspan=3)
 
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import NumBtn from './NumBtn'
+import ClrBtn from './ClrBtn'
+import AddBtn from './AddBtn'
+
 export default {
   name: 'calc',
-  data () {
-    return {
-      value: 0
-    }
-  }
+  components: { NumBtn, ClrBtn, AddBtn },
+  computed: mapGetters(['number'])
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
-.btn
-  margin 4px
-  width 100px
-  height 100px
-  font-size 72px
 
-.btn-wide
-  width 424px
-h1, h2
-  font-weight normal
-
-ul
-  list-style-type none
-  padding 0
-
-li
-  display inline-block
-  margin 0 20px
+// .d-flex
+//   width 350px
 
 </style>

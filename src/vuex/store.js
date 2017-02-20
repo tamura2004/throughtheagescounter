@@ -7,7 +7,8 @@ import {
   APPEND_NUMBER,
   ADD_VALUE,
   CLEAR_NUMBER,
-  EDIT_NUMBER
+  EDIT_NUMBER,
+  INIT_ALL
 } from './mutation-types'
 
 import { USERS } from './users'
@@ -18,7 +19,7 @@ const state = {
     userKey: 'blue',
     valueKey: 'sp'
   },
-  users: USERS,
+  users: Object.assign({}, USERS),
   valueNames: {
     sp: '科学P',
     sd: '+科学',
@@ -42,13 +43,24 @@ const actions = {
 
   [EDIT_NUMBER] ({ commit }, keyword) {
     commit(EDIT_NUMBER, keyword)
+  },
+
+  [INIT_ALL] ({ commit }, keyword) {
+    commit(INIT_ALL, keyword)
   }
 }
 
 const getters = {
-  edit: state => state.edit,
+  edit: state => Object.assign({
+    userName: state.users[state.edit.userKey].name,
+    valueName: state.valueNames[state.edit.valueKey],
+    value: state.users[state.edit.userKey].values[state.edit.valueKey]
+  }, state.edit),
   users: state => state.users,
-  valueNames: state => state.valueNames
+  valueNames: state => state.valueNames,
+  user: state => state.users[state.edit.userKey],
+  userKey: state => state.edit.userKey,
+  valueKey: state => state.edit.valueKey
 }
 
 const mutations = {
@@ -76,6 +88,14 @@ const mutations = {
     state.edit.userKey = keyword.userKey
     state.edit.valueKey = keyword.valueKey
     router.push('/calc')
+  },
+
+  [INIT_ALL] (state, keyword) {
+    for (let ukey of ['blue', 'green', 'yellow', 'red']) {
+      for (let vkey of ['sp', 'sd', 'cp', 'cd']) {
+        state.users[ukey].values[vkey] = vkey === 'sd' ? 1 : 0
+      }
+    }
   }
 }
 

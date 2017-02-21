@@ -19,6 +19,7 @@ import {
 
 import { USERS } from './users'
 import { Say } from './Say'
+import { Log } from './Log'
 
 const state = {
   edit: {
@@ -28,11 +29,12 @@ const state = {
   },
   users: Object.assign({}, USERS),
   valueNames: {
-    sp: '科学P',
-    sd: '+科学',
-    cp: '文明P',
-    cd: '+文明'
-  }
+    sp: '科学ポイント',
+    sd: '科学増加',
+    cp: '文明ポイント',
+    cd: '文明増加'
+  },
+  logs: []
 }
 
 const actions = {
@@ -40,18 +42,18 @@ const actions = {
     commit(APPEND_NUMBER, keyword)
   },
 
-  [ADD_VALUE] ({ commit }, keyword) {
-    commit(ADD_VALUE, keyword)
+  [ADD_VALUE] ({ commit }) {
+    commit(ADD_VALUE)
     router.push('/')
   },
 
-  [SUB_VALUE] ({ commit }, keyword) {
-    commit(SUB_VALUE, keyword)
+  [SUB_VALUE] ({ commit }) {
+    commit(SUB_VALUE)
     router.push('/')
   },
 
-  [SET_VALUE] ({ commit }, keyword) {
-    commit(SET_VALUE, keyword)
+  [SET_VALUE] ({ commit }) {
+    commit(SET_VALUE)
     router.push('/')
   },
 
@@ -79,7 +81,10 @@ const actions = {
   },
 
   [INIT_ALL] ({ commit }, keyword) {
-    commit(INIT_ALL, keyword)
+    let res = confirm('すべて初期化してよろしいですか')
+    if (res === true) {
+      commit(INIT_ALL, keyword)
+    }
   }
 }
 
@@ -89,7 +94,8 @@ const getters = {
   valueNames: state => state.valueNames,
   user: state => state.users[state.edit.userKey],
   userKey: state => state.edit.userKey,
-  valueKey: state => state.edit.valueKey
+  valueKey: state => state.edit.valueKey,
+  logs: state => state.logs
 }
 
 const mutations = {
@@ -102,19 +108,22 @@ const mutations = {
     }
   },
 
-  [ADD_VALUE] (state, keyword) {
+  [ADD_VALUE] (state) {
     let { number, userKey, valueKey } = state.edit
     state.users[userKey].values[valueKey] += number
+    Log(state, ADD_VALUE)
   },
 
-  [SUB_VALUE] (state, keyword) {
+  [SUB_VALUE] (state) {
     let { number, userKey, valueKey } = state.edit
     state.users[userKey].values[valueKey] -= number
+    Log(state, SUB_VALUE)
   },
 
-  [SET_VALUE] (state, keyword) {
+  [SET_VALUE] (state) {
     let { number, userKey, valueKey } = state.edit
     state.users[userKey].values[valueKey] = number
+    Log(state, SET_VALUE)
   },
 
   [CLEAR_NUMBER] (state, keyword) {
@@ -127,18 +136,22 @@ const mutations = {
     state.edit.valueKey = keyword.valueKey
   },
 
-  [EDIT_USER] (state, keyword) {
-    state.edit.userKey = keyword
+  [EDIT_USER] (state, userKey) {
+    state.edit.userKey = userKey
   },
 
-  [SET_USER_NAME] (state, keyword) {
-    state.users[state.edit.userKey].name = keyword
+  [SET_USER_NAME] (state, userName) {
+    state.users[state.edit.userKey].name = userName
   },
 
   [NEXT_TURN] (state, userKey) {
-    let values = state.users[userKey].values
+    state.edit.userKey = userKey
+    let user = state.users[userKey]
+    let values = user.values
+    user.turn += 1
     values.sp += values.sd
     values.cp += values.cd
+    Log(state, NEXT_TURN)
   },
 
   [INIT_ALL] (state, keyword) {
@@ -148,6 +161,7 @@ const mutations = {
       }
     }
     Say('科学ポイントと文化ポイントを、全部初期化します。')
+    Log(state, INIT_ALL)
   }
 }
 

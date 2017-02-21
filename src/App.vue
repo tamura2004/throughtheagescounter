@@ -6,8 +6,13 @@
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ",
     crossorigin="anonymous"
   )
-  nav.navbar
-    a.navbar-brand(@click="INIT_ALL") ThroughTheAges得点カウンター
+  nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse
+    .navbar-brand ThroughTheAges得点カウンター
+    .navbar-nav
+      .nav-item.nav-link(@click="INIT_ALL") リセット
+      router-link.nav-item.nav-link(to="/") 得点表
+      router-link.nav-item.nav-link(to="/logs") 記録を見る
+
   router-view
 </template>
 
@@ -30,6 +35,6 @@ export default {
 
 nav
   margin-bottom 32px
-  background-color lightgray
+  // background-color lightgray
 
 </style>

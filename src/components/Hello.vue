@@ -6,7 +6,10 @@
         :user="user",
         :userKey="userKey"
       )
-      NextTurnPanel(:userKey="userKey")
+      NextTurnPanel(
+        :user="user",
+        :userKey="userKey"
+      )
       hr
       PointPanel(
         v-for="(value,valueKey) in user.values",

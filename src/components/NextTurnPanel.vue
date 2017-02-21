@@ -2,7 +2,7 @@
   button.btn.btn-block.btn-secondary(
     @click="NEXT_TURN(userKey)"
   )
-    h4 ターン更新
+    h4 {{ user.turn }} ターン
 
 </template>
 
@@ -13,7 +13,7 @@ import { NEXT_TURN } from '../vuex/mutation-types'
 export default {
   name: 'nextTurnPanel',
   methods: mapActions([NEXT_TURN]),
-  props: ['userKey']
+  props: ['user', 'userKey']
 }
 </script>
 

@@ -2,26 +2,38 @@
   .container
     .row
       .col-3
-        button.btn.btn-block(:class="'btn-'+user.color")
+        button.btn.btn-block(:class="'btn-' + user.color")
+          h4 {{ user.name }}
+
+        PointPanel(
+          :user="user",
+          :userKey="userKey",
+          :valueKey="valueKey"
+        )
+
       .col-9
         .card: h4 {{ edit.number }}
         table
           tr
-            td: NumBtn(num="9")
-            td: NumBtn(num="8")
             td: NumBtn(num="7")
+            td: NumBtn(num="8")
+            td: NumBtn(num="9")
             td: ClrBtn
           tr
-            td: NumBtn(num="6")
-            td: NumBtn(num="5")
             td: NumBtn(num="4")
+            td: NumBtn(num="5")
+            td: NumBtn(num="6")
             td: AddBtn
           tr
-            td: NumBtn(num="3")
-            td: NumBtn(num="2")
             td: NumBtn(num="1")
+            td: NumBtn(num="2")
+            td: NumBtn(num="3")
+            td: SubBtn
           tr
-            td: NumBtn(num="0" colspan=3)
+            td: NumBtn(num="0")
+            td: NumBtn(num="00")
+            td: NumBtn(num=".")
+            td: SetBtn
 
 
 </template>
@@ -31,11 +43,13 @@ import { mapGetters } from 'vuex'
 import NumBtn from './NumBtn'
 import ClrBtn from './ClrBtn'
 import AddBtn from './AddBtn'
+import SubBtn from './SubBtn'
+import SetBtn from './SetBtn'
 import PointPanel from './PointPanel'
 
 export default {
   name: 'calc',
-  components: { NumBtn, ClrBtn, AddBtn, PointPanel },
+  components: { NumBtn, ClrBtn, AddBtn, SubBtn, SetBtn, PointPanel },
   computed: mapGetters(['edit', 'user', 'userKey', 'valueKey'])
 }
 </script>

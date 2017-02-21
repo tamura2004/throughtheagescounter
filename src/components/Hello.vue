@@ -2,10 +2,12 @@
 .container
   .row
     .col(v-for="(user, userKey) in users")
-      button.btn.btn-block(:class="'btn-'+user.color")
-        h4 {{ user.name }}
+      UserPanel(
+        :user="user",
+        :userKey="userKey"
+      )
+      NextTurnPanel(:userKey="userKey")
       hr
-
       PointPanel(
         v-for="(value,valueKey) in user.values",
         :user="user",
@@ -18,11 +20,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import PointPanel from './PointPanel'
+import UserPanel from './UserPanel'
+import NextTurnPanel from './NextTurnPanel'
 
 export default {
   name: 'hello',
   computed: mapGetters(['users']),
-  components: { PointPanel }
+  components: { PointPanel, UserPanel, NextTurnPanel }
 }
 </script>
 

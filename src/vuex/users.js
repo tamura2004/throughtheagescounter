@@ -1,6 +1,6 @@
 export const USERS = {
   blue: {
-    color: 'primary',
+    color: 'btn-primary',
     name: '高山',
     values: {
       sp: 0,
@@ -10,7 +10,7 @@ export const USERS = {
     }
   },
   green: {
-    color: 'success',
+    color: 'btn-success',
     name: '江原',
     values: {
       sp: 0,
@@ -20,7 +20,7 @@ export const USERS = {
     }
   },
   yellow: {
-    color: 'warning',
+    color: 'btn-warning',
     name: '津下',
     values: {
       sp: 0,
@@ -30,7 +30,7 @@ export const USERS = {
     }
   },
   red: {
-    color: 'danger',
+    color: 'btn-danger',
     name: '田村',
     values: {
       sp: 0,

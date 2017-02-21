@@ -1,13 +1,19 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import router from '../router'
 Vue.use(Vuex)
+
+import router from '../router'
 
 import {
   APPEND_NUMBER,
   ADD_VALUE,
+  SUB_VALUE,
+  SET_VALUE,
   CLEAR_NUMBER,
   EDIT_NUMBER,
+  EDIT_USER,
+  SET_USER_NAME,
+  NEXT_TURN,
   INIT_ALL
 } from './mutation-types'
 
@@ -36,6 +42,17 @@ const actions = {
 
   [ADD_VALUE] ({ commit }, keyword) {
     commit(ADD_VALUE, keyword)
+    router.push('/')
+  },
+
+  [SUB_VALUE] ({ commit }, keyword) {
+    commit(SUB_VALUE, keyword)
+    router.push('/')
+  },
+
+  [SET_VALUE] ({ commit }, keyword) {
+    commit(SET_VALUE, keyword)
+    router.push('/')
   },
 
   [CLEAR_NUMBER] ({ commit }, keyword) {
@@ -44,6 +61,21 @@ const actions = {
 
   [EDIT_NUMBER] ({ commit }, keyword) {
     commit(EDIT_NUMBER, keyword)
+    router.push('/calc')
+  },
+
+  [EDIT_USER] ({ commit }, keyword) {
+    commit(EDIT_USER, keyword)
+    router.push('/selectuser')
+  },
+
+  [SET_USER_NAME] ({ commit }, keyword) {
+    commit(SET_USER_NAME, keyword)
+    router.push('/')
+  },
+
+  [NEXT_TURN] ({ commit }, keyword) {
+    commit(NEXT_TURN, keyword)
   },
 
   [INIT_ALL] ({ commit }, keyword) {
@@ -52,11 +84,7 @@ const actions = {
 }
 
 const getters = {
-  edit: state => Object.assign({
-    userName: state.users[state.edit.userKey].name,
-    valueName: state.valueNames[state.edit.valueKey],
-    value: state.users[state.edit.userKey].values[state.edit.valueKey]
-  }, state.edit),
+  edit: state => state.edit,
   users: state => state.users,
   valueNames: state => state.valueNames,
   user: state => state.users[state.edit.userKey],
@@ -77,7 +105,16 @@ const mutations = {
   [ADD_VALUE] (state, keyword) {
     let { number, userKey, valueKey } = state.edit
     state.users[userKey].values[valueKey] += number
-    router.push('/')
+  },
+
+  [SUB_VALUE] (state, keyword) {
+    let { number, userKey, valueKey } = state.edit
+    state.users[userKey].values[valueKey] -= number
+  },
+
+  [SET_VALUE] (state, keyword) {
+    let { number, userKey, valueKey } = state.edit
+    state.users[userKey].values[valueKey] = number
   },
 
   [CLEAR_NUMBER] (state, keyword) {
@@ -88,7 +125,20 @@ const mutations = {
     state.edit.number = 0
     state.edit.userKey = keyword.userKey
     state.edit.valueKey = keyword.valueKey
-    router.push('/calc')
+  },
+
+  [EDIT_USER] (state, keyword) {
+    state.edit.userKey = keyword
+  },
+
+  [SET_USER_NAME] (state, keyword) {
+    state.users[state.edit.userKey].name = keyword
+  },
+
+  [NEXT_TURN] (state, userKey) {
+    let values = state.users[userKey].values
+    values.sp += values.sd
+    values.cp += values.cd
   },
 
   [INIT_ALL] (state, keyword) {

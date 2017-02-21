@@ -1,14 +1,14 @@
 <template lang="pug">
-  .btn.btn-lg.btn-warning(@click="ADD_VALUE") +
+  .btn.btn-lg.btn-warning(@click="SUB_VALUE") -
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-import { ADD_VALUE } from '../vuex/mutation-types'
+import { SUB_VALUE } from '../vuex/mutation-types'
 
 export default {
-  name: 'addBtn',
-  methods: mapActions([ADD_VALUE])
+  name: 'subBtn',
+  methods: mapActions([SUB_VALUE])
 }
 </script>
 

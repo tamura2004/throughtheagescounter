@@ -1,6 +1,6 @@
 <template lang="pug">
   button.btn.btn-block(
-    :class="'btn-'+user.color",
+    :class="user.color",
     @click="EDIT_NUMBER({userKey: userKey, valueKey: valueKey})"
   )
     p {{ valueNames[valueKey] }}

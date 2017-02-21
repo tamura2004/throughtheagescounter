@@ -12,6 +12,7 @@ import {
 } from './mutation-types'
 
 import { USERS } from './users'
+import { Say } from './Say'
 
 const state = {
   edit: {
@@ -69,7 +70,7 @@ const mutations = {
       state.edit.number *= 10
       state.edit.number += Number(keyword)
     } else {
-      alert('数字は8桁が上限です')
+      Say('数字はハチ桁が上限です')
     }
   },
 
@@ -96,6 +97,7 @@ const mutations = {
         state.users[ukey].values[vkey] = vkey === 'sd' ? 1 : 0
       }
     }
+    Say('科学ポイントと文化ポイントを、全部初期化します。')
   }
 }
 

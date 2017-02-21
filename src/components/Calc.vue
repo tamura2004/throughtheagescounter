@@ -2,7 +2,7 @@
   .container
     .row
       .col-3
-        button.btn.btn-block(:class="'btn-' + user.color")
+        button.btn.btn-block(:class="user.color")
           h4 {{ user.name }}
 
         PointPanel(

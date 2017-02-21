@@ -1,6 +1,5 @@
 export function Log (state, action) {
   let user = state.users[state.edit.userKey]
-  let value = user.values[state.edit.valueKey]
   let userName = user.name
   let valueName = state.valueNames[state.edit.valueKey]
 
@@ -33,6 +32,6 @@ export function Log (state, action) {
       break
 
     default:
-      state.logs.push(`${userName}の${valueName}を${value}ポイント${actionName}`)
+      state.logs.push(`${userName}の${valueName}を${state.edit.number}ポイント${actionName}`)
   }
 }

@@ -1,6 +1,6 @@
-# frontend
+# Through The Ages Counter
 
-> A Vue.js project
+> ボードゲーム「スルー／ジ／エイジズ」の得点記録表
 
 ## Build Setup
 

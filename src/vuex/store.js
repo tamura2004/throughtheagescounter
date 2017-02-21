@@ -57,12 +57,12 @@ const actions = {
     router.push('/')
   },
 
-  [CLEAR_NUMBER] ({ commit }, keyword) {
-    commit(CLEAR_NUMBER, keyword)
+  [CLEAR_NUMBER] ({ commit }) {
+    commit(CLEAR_NUMBER)
   },
 
-  [EDIT_NUMBER] ({ commit }, keyword) {
-    commit(EDIT_NUMBER, keyword)
+  [EDIT_NUMBER] ({ commit }, edit) {
+    commit(EDIT_NUMBER, edit)
     router.push('/calc')
   },
 
@@ -80,10 +80,10 @@ const actions = {
     commit(NEXT_TURN, keyword)
   },
 
-  [INIT_ALL] ({ commit }, keyword) {
+  [INIT_ALL] ({ commit }) {
     let res = confirm('すべて初期化してよろしいですか')
     if (res === true) {
-      commit(INIT_ALL, keyword)
+      commit(INIT_ALL)
     }
   }
 }
@@ -126,14 +126,14 @@ const mutations = {
     Log(state, SET_VALUE)
   },
 
-  [CLEAR_NUMBER] (state, keyword) {
+  [CLEAR_NUMBER] (state) {
     state.edit.number = 0
   },
 
-  [EDIT_NUMBER] (state, keyword) {
+  [EDIT_NUMBER] (state, edit) {
     state.edit.number = 0
-    state.edit.userKey = keyword.userKey
-    state.edit.valueKey = keyword.valueKey
+    state.edit.userKey = edit.userKey
+    state.edit.valueKey = edit.valueKey
   },
 
   [EDIT_USER] (state, userKey) {
@@ -154,13 +154,19 @@ const mutations = {
     Log(state, NEXT_TURN)
   },
 
-  [INIT_ALL] (state, keyword) {
-    for (let ukey of ['blue', 'green', 'yellow', 'red']) {
-      for (let vkey of ['sp', 'sd', 'cp', 'cd']) {
-        state.users[ukey].values[vkey] = vkey === 'sd' ? 1 : 0
+  [INIT_ALL] (state) {
+    for (let user of Object.values(state.users)) {
+      user.turn = 1
+      for (let key of Object.keys(user.values)) {
+        user.values[key] = key === 'sd' ? 1 : 0
       }
     }
-    Say('科学ポイントと文化ポイントを、全部初期化します。')
+    // for (let ukey of ['blue', 'green', 'yellow', 'red']) {
+    //   for (let vkey of ['sp', 'sd', 'cp', 'cd']) {
+    //     state.users[ukey].values[vkey] = vkey === 'sd' ? 1 : 0
+    //   }
+    // }
+    Say('得点表を、初期化します。')
     Log(state, INIT_ALL)
   }
 }

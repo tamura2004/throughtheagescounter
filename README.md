@@ -2,6 +2,8 @@
 
 > ボードゲーム「スルー／ジ／エイジズ」の得点記録表
 
+[ここから起動](https://tamura2004.github.io/throughtheagescounter/#/)
+
 ## Build Setup
 
 ``` bash

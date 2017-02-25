@@ -19,12 +19,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import UsrBtn from './UsrBtn'
 
 export default {
   name: 'selectUser',
-  computed: mapGetters(['userKey']),
   components: { UsrBtn }
 }
 </script>

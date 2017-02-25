@@ -1,5 +1,5 @@
 export function Log (state, action) {
-  let user = state.users[state.edit.userKey]
+  let user = state.score.users[state.edit.userKey]
   let userName = user.name
   let valueName = state.valueNames[state.edit.valueKey]
 

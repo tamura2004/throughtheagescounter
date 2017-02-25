@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from 'components/Hello'
 import Calc from 'components/Calc'
 import Logs from 'components/Logs'
+import Load from 'components/Load'
 import SelectUser from 'components/SelectUser'
 
 Vue.use(Router)
@@ -23,6 +24,11 @@ export default new Router({
       path: '/calc',
       name: 'Calc',
       component: Calc
+    },
+    {
+      path: '/load',
+      name: 'Load',
+      component: Load
     },
     {
       path: '/logs',

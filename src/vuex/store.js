@@ -3,6 +3,7 @@ import Vue from 'vue'
 Vue.use(Vuex)
 
 import router from '../router'
+import http from './axios'
 
 import {
   APPEND_NUMBER,
@@ -14,6 +15,10 @@ import {
   EDIT_USER,
   SET_USER_NAME,
   NEXT_TURN,
+  SAVE,
+  LOAD,
+  USE_SCORE,
+  DELETE,
   INIT_ALL
 } from './mutation-types'
 
@@ -27,7 +32,12 @@ const state = {
     userKey: 'blue',
     valueKey: 'sp'
   },
-  users: Object.assign({}, USERS),
+  score: {
+    _id: null,
+    users: USERS,
+    updated_at: ''
+  },
+  scores: [],
   valueNames: {
     sp: '科学ポイント',
     sd: '科学増加',
@@ -71,13 +81,53 @@ const actions = {
     router.push('/selectuser')
   },
 
-  [SET_USER_NAME] ({ commit }, keyword) {
-    commit(SET_USER_NAME, keyword)
+  [SET_USER_NAME] ({ commit }, name) {
+    commit(SET_USER_NAME, name)
     router.push('/')
   },
 
-  [NEXT_TURN] ({ commit }, keyword) {
-    commit(NEXT_TURN, keyword)
+  [NEXT_TURN] ({ commit, dispatch }, userKey) {
+    commit(NEXT_TURN, userKey)
+    dispatch(SAVE)
+  },
+
+  [SAVE] ({ commit, state }) {
+    const id = state.score._id
+    const method = id ? 'put' : 'post'
+    const url = id ? `/${id.$oid}` : '/'
+    state.score.updated_at = new Date()
+
+    http({
+      url: url,
+      method: method,
+      data: JSON.stringify(state.score)
+    })
+    .then(r => commit(SAVE, r.data))
+    .catch(e => alert(e))
+  },
+
+  [LOAD] ({ commit }) {
+    http({
+      method: 'get',
+      url: '/'
+    })
+    .then(r => commit(LOAD, r.data))
+    .catch(e => alert(e))
+    router.push('/load')
+  },
+
+  [USE_SCORE] ({ commit }, id) {
+    commit(USE_SCORE, id)
+    router.push('/')
+  },
+
+  [DELETE] ({ commit }, id) {
+    http({
+      method: 'delete',
+      url: `/${id.$oid}`
+    })
+    .then(r => commit(DELETE, id))
+    .catch(e => alert(e))
   },
 
   [INIT_ALL] ({ commit }) {
@@ -85,14 +135,16 @@ const actions = {
     if (res === true) {
       commit(INIT_ALL)
     }
+    router.push('/')
   }
 }
 
 const getters = {
+  scores: state => state.scores,
   edit: state => state.edit,
-  users: state => state.users,
+  users: state => state.score.users,
   valueNames: state => state.valueNames,
-  user: state => state.users[state.edit.userKey],
+  user: state => state.score.users[state.edit.userKey],
   userKey: state => state.edit.userKey,
   valueKey: state => state.edit.valueKey,
   logs: state => state.logs
@@ -110,19 +162,19 @@ const mutations = {
 
   [ADD_VALUE] (state) {
     let { number, userKey, valueKey } = state.edit
-    state.users[userKey].values[valueKey] += number
+    state.score.users[userKey].values[valueKey] += number
     Log(state, ADD_VALUE)
   },
 
   [SUB_VALUE] (state) {
     let { number, userKey, valueKey } = state.edit
-    state.users[userKey].values[valueKey] -= number
+    state.score.users[userKey].values[valueKey] -= number
     Log(state, SUB_VALUE)
   },
 
   [SET_VALUE] (state) {
     let { number, userKey, valueKey } = state.edit
-    state.users[userKey].values[valueKey] = number
+    state.score.users[userKey].values[valueKey] = number
     Log(state, SET_VALUE)
   },
 
@@ -141,12 +193,12 @@ const mutations = {
   },
 
   [SET_USER_NAME] (state, userName) {
-    state.users[state.edit.userKey].name = userName
+    state.score.users[state.edit.userKey].name = userName
   },
 
   [NEXT_TURN] (state, userKey) {
     state.edit.userKey = userKey
-    let user = state.users[userKey]
+    let user = state.score.users[userKey]
     let values = user.values
     user.turn += 1
     values.sp += values.sd
@@ -154,18 +206,42 @@ const mutations = {
     Log(state, NEXT_TURN)
   },
 
+  [SAVE] (state, data) {
+    state.score._id = data._id
+  },
+
+  [LOAD] (state, data) {
+    state.scores = data
+  },
+
+  [USE_SCORE] (state, id) {
+    for (const score of state.scores) {
+      if (score._id === id) {
+        state.score = score
+      }
+    }
+  },
+
+  [DELETE] (state, id) {
+    let scores = []
+    for (const score of state.scores) {
+      if (score._id !== id) {
+        scores.push(score)
+      }
+    }
+    state.scores = scores
+  },
+
   [INIT_ALL] (state) {
-    for (let user of Object.values(state.users)) {
+    for (let user of Object.values(state.score.users)) {
       user.turn = 1
+      user.name = 'なし'
       for (let key of Object.keys(user.values)) {
         user.values[key] = key === 'sd' ? 1 : 0
       }
     }
-    // for (let ukey of ['blue', 'green', 'yellow', 'red']) {
-    //   for (let vkey of ['sp', 'sd', 'cp', 'cd']) {
-    //     state.users[ukey].values[vkey] = vkey === 'sd' ? 1 : 0
-    //   }
-    // }
+    state.score._id = null
+    state.score.updated_at = null
     Say('得点表を、初期化します。')
     Log(state, INIT_ALL)
   }

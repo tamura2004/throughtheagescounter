@@ -33,7 +33,8 @@ export default {
         method: 'post',
         url: 'https://api.mlab.com/api/1/databases/throughtheagescounter/collections/users',
         data: {
-          data: JSON.stringify(this.users)
+          users: JSON.stringify(this.users),
+          updated_at: JSON.stringify(new Date())
         },
         params: {
           apiKey: '504eb50ae4b02f705f156c2e'

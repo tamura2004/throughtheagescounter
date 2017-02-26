@@ -97,20 +97,13 @@ const actions = {
     const url = id ? `/${id.$oid}` : '/'
     state.score.updated_at = new Date()
 
-    http({
-      url: url,
-      method: method,
-      data: JSON.stringify(state.score)
-    })
+    http[method](url, state.score)
     .then(r => commit(SAVE, r.data))
     .catch(e => alert(e))
   },
 
   [LOAD] ({ commit }) {
-    http({
-      method: 'get',
-      url: '/'
-    })
+    http.get('/')
     .then(r => commit(LOAD, r.data))
     .catch(e => alert(e))
     router.push('/load')
@@ -122,10 +115,7 @@ const actions = {
   },
 
   [DELETE] ({ commit }, id) {
-    http({
-      method: 'delete',
-      url: `/${id.$oid}`
-    })
+    http.delete(`/${id.$oid}`)
     .then(r => commit(DELETE, id))
     .catch(e => alert(e))
   },

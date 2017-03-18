@@ -162,20 +162,23 @@ const mutations = {
 
   [ADD_VALUE] (state) {
     let { number, userKey, valueKey } = state.edit
+    let oldValue = state.score.users[userKey].values[valueKey]
     state.score.users[userKey].values[valueKey] += number
-    Log(state, ADD_VALUE)
+    Log(state, ADD_VALUE, oldValue)
   },
 
   [SUB_VALUE] (state) {
     let { number, userKey, valueKey } = state.edit
+    let oldValue = state.score.users[userKey].values[valueKey]
     state.score.users[userKey].values[valueKey] -= number
-    Log(state, SUB_VALUE)
+    Log(state, SUB_VALUE, oldValue)
   },
 
   [SET_VALUE] (state) {
     let { number, userKey, valueKey } = state.edit
+    let oldValue = state.score.users[userKey].values[valueKey]
     state.score.users[userKey].values[valueKey] = number
-    Log(state, SET_VALUE)
+    Log(state, SET_VALUE, oldValue)
   },
 
   [CLEAR_NUMBER] (state) {

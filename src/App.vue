@@ -9,11 +9,11 @@
   nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse
     .navbar-brand ThroughTheAges得点カウンター
     .navbar-nav
-      .nav-item.nav-link(@click="INIT_ALL") リセット
       router-link.nav-item.nav-link(to="/", :class="{active: isRoutePath}") 得点表
       router-link.nav-item.nav-link(to="/logs") 記録を見る
       .nav-item.nav-link(@click="SAVE") セーブ
-      .nav-item.nav-link(@click="LOAD", :class="{active: isLoadPath}") ロード
+      .nav-item.nav-link(@click="LOAD") ロード
+      .nav-item.nav-link(@click="INIT_ALL") リセット
 
   router-view
 </template>

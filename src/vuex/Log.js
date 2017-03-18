@@ -1,4 +1,4 @@
-export function Log (state, action) {
+export function Log (state, action, oldValue = 0) {
   let user = state.score.users[state.edit.userKey]
   let userName = user.name
   let valueName = state.valueNames[state.edit.valueKey]
@@ -20,18 +20,18 @@ export function Log (state, action) {
       let cpName = state.valueNames['cp']
       let cd = user.values['cd']
 
-      state.logs.push(`${userName}の${user.turn - 1}ターンを終了します。`)
-      state.logs.push(`${userName}の${spName}を${sd}ポイント増加させました。`)
-      state.logs.push(`${userName}の${cpName}を${cd}ポイント増加させました。`)
-      state.logs.push(`${userName}の${user.turn}ターンを開始します。`)
+      state.logs.unshift(`${userName}の${user.turn - 1}ターンを終了します。`)
+      state.logs.unshift(`${userName}の${spName}を${sd}ポイント増加させました。`)
+      state.logs.unshift(`${userName}の${cpName}を${cd}ポイント増加させました。`)
+      state.logs.unshift(`${userName}の${user.turn}ターンを開始します。`)
 
       break
 
     case 'INIT_ALL':
-      state.logs.push('得点表をすべて初期化しました。')
+      state.logs.unshift('得点表をすべて初期化しました。')
       break
 
     default:
-      state.logs.push(`${userName}の${valueName}を${state.edit.number}ポイント${actionName}`)
+      state.logs.unshift(`${userName}の${valueName}を${oldValue}から${state.edit.number}ポイント${actionName}`)
   }
 }

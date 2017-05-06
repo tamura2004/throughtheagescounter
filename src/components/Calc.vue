@@ -11,6 +11,7 @@
           :valueKey="valueKey"
         )
 
+
       .col-9
         .card: h4 {{ edit.number }}
         table
@@ -33,7 +34,7 @@
             td: NumBtn(num="0")
             td: NumBtn(num="00")
             td: NumBtn(num=".")
-            td: SetBtn
+            td: IncBtn
 
 
 </template>
@@ -44,13 +45,13 @@ import NumBtn from './NumBtn'
 import ClrBtn from './ClrBtn'
 import AddBtn from './AddBtn'
 import SubBtn from './SubBtn'
-import SetBtn from './SetBtn'
+import IncBtn from './IncBtn'
 import PointPanel from './PointPanel'
 import MiniPanel from './MiniPanel'
 
 export default {
   name: 'calc',
-  components: { NumBtn, ClrBtn, AddBtn, SubBtn, SetBtn, PointPanel, MiniPanel },
+  components: { NumBtn, ClrBtn, AddBtn, SubBtn, IncBtn, PointPanel, MiniPanel },
   computed: mapGetters(['edit', 'user', 'userKey', 'valueKey'])
 }
 </script>

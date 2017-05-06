@@ -6,6 +6,12 @@
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ",
     crossorigin="anonymous"
   )
+
+  link(
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  )
+
   nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse
     .navbar-brand ThroughTheAges得点カウンター
     .navbar-nav

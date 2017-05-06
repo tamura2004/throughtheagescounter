@@ -10,6 +10,7 @@ import {
   ADD_VALUE,
   SUB_VALUE,
   SET_VALUE,
+  INC_VALUE,
   CLEAR_NUMBER,
   EDIT_NUMBER,
   EDIT_USER,
@@ -39,22 +40,22 @@ const state = {
   },
   scores: [],
   valueNames: {
-    vp: '勝利点',
-    sp: '科学ポイント',
-    sd: '科学増加',
-    cp: '文明ポイント',
-    cd: '文明増加',
-    fp: '食糧生産',
-    rp: '資源算出',
-    mi: '軍事力',
-    co: '植民地',
-    hp: '幸福点',
-    t1: '時代I技術',
-    t2: '時代II技術',
-    p1: '時代I政体',
-    p2: '時代II政体',
-    w1: '時代I驚異',
-    w2: '時代II驚異'
+    vp: '勝<br>利<br>点',
+    sp: '科学<br>点',
+    sd: '科学<br>増加',
+    cp: '文明<br>点',
+    cd: '文明<br>増加',
+    fp: '食糧<br>生産',
+    rp: '資源<br>算出',
+    mi: '軍事<br>力',
+    co: '植民<br>地',
+    hp: '幸福<br>点',
+    t1: '時代I<br>技術',
+    t2: '時代II<br>技術',
+    p1: '時代I<br>政体',
+    p2: '時代II<br>政体',
+    w1: '時代I<br>驚異',
+    w2: '時代II<br>驚異'
   },
   logs: []
 }
@@ -76,6 +77,11 @@ const actions = {
 
   [SET_VALUE] ({ commit }) {
     commit(SET_VALUE)
+    router.push('/')
+  },
+
+  [INC_VALUE] ({ commit }) {
+    commit(INC_VALUE)
     router.push('/')
   },
 
@@ -183,6 +189,13 @@ const mutations = {
     let { number, userKey, valueKey } = state.edit
     let oldValue = state.score.users[userKey].values[valueKey]
     state.score.users[userKey].values[valueKey] = number
+    Log(state, SET_VALUE, oldValue)
+  },
+
+  [INC_VALUE] (state) {
+    let { userKey, valueKey } = state.edit
+    let oldValue = state.score.users[userKey].values[valueKey]
+    state.score.users[userKey].values[valueKey] += 1
     Log(state, SET_VALUE, oldValue)
   },
 

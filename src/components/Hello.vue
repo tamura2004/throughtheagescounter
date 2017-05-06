@@ -10,7 +10,6 @@
         :user="user",
         :userKey="userKey"
       )
-      hr
       PointPanel(
         :user="user",
         :userKey="userKey",

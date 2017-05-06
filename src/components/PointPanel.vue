@@ -5,7 +5,7 @@
   )
     .row
       .col-2
-        p {{ valueNames[valueKey] }}
+        p(v-html="valueNames[valueKey]")
       .col-10
         h2 {{ vp(user) }}
 
@@ -27,12 +27,13 @@ export default {
 <style lang="stylus" scoped>
 p
   font-size 2rem
+  margin-bottom 4px
 
 h2
   color color
   font-weight bold
   font-family Poppins
   letter-spacing -3px
-  font-size 6rem
+  font-size 7rem
   text-shadow 2px 0 0 #000, 0 2px 0 #000, -2px 0 0 #000, 0 -2px 0 #000, 5px 4px 3px rgba(0,0,0,0.5)
 </style>

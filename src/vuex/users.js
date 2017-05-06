@@ -4,10 +4,22 @@ export const USERS = {
     turn: 1,
     name: 'なし',
     values: {
+      vp: 0,
       sp: 0,
       sd: 1,
       cp: 0,
-      cd: 0
+      cd: 0,
+      mi: 1,
+      hp: 0,
+      fp: 2,
+      rp: 2,
+      co: 0,
+      t1: 0,
+      t2: 0,
+      p1: 0,
+      p2: 0,
+      w1: 0,
+      w2: 0
     }
   },
   green: {
@@ -15,10 +27,22 @@ export const USERS = {
     turn: 1,
     name: 'なし',
     values: {
+      vp: 0,
       sp: 0,
       sd: 1,
       cp: 0,
-      cd: 0
+      cd: 0,
+      mi: 1,
+      hp: 0,
+      fp: 2,
+      rp: 2,
+      co: 0,
+      t1: 0,
+      t2: 0,
+      p1: 0,
+      p2: 0,
+      w1: 0,
+      w2: 0
     }
   },
   yellow: {
@@ -26,10 +50,22 @@ export const USERS = {
     turn: 1,
     name: 'なし',
     values: {
+      vp: 0,
       sp: 0,
       sd: 1,
       cp: 0,
-      cd: 0
+      cd: 0,
+      mi: 1,
+      hp: 0,
+      fp: 2,
+      rp: 2,
+      co: 0,
+      t1: 0,
+      t2: 0,
+      p1: 0,
+      p2: 0,
+      w1: 0,
+      w2: 0
     }
   },
   red: {
@@ -37,10 +73,22 @@ export const USERS = {
     turn: 1,
     name: 'なし',
     values: {
+      vp: 0,
       sp: 0,
       sd: 1,
       cp: 0,
-      cd: 0
+      cd: 0,
+      mi: 1,
+      hp: 0,
+      fp: 2,
+      rp: 2,
+      co: 0,
+      t1: 0,
+      t2: 0,
+      p1: 0,
+      p2: 0,
+      w1: 0,
+      w2: 0
     }
   }
 }

@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+.container-fluid
   .row
     .col(v-for="(user, userKey) in users")
       UserPanel(
@@ -12,11 +12,40 @@
       )
       hr
       PointPanel(
-        v-for="(value,valueKey) in user.values",
         :user="user",
         :userKey="userKey",
-        :valueKey="valueKey"
+        valueKey="vp"
       )
+      .row
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="sp")
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="sd")
+
+      .row
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="cp")
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="cd")
+
+      .row
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="fp")
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="rp")
+
+      .row
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="mi")
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="co")
+
+      .row
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="hp")
+
+      .row
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="t1")
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="t2")
+
+      .row
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="p1")
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="p2")
+
+      .row
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="w1")
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="w2")
 
 </template>
 
@@ -25,11 +54,12 @@ import { mapGetters } from 'vuex'
 import PointPanel from './PointPanel'
 import UserPanel from './UserPanel'
 import NextTurnPanel from './NextTurnPanel'
+import MiniPanel from './MiniPanel'
 
 export default {
   name: 'hello',
   computed: mapGetters(['users']),
-  components: { PointPanel, UserPanel, NextTurnPanel }
+  components: { PointPanel, UserPanel, NextTurnPanel, MiniPanel }
 }
 </script>
 

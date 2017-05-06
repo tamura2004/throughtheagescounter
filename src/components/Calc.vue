@@ -5,7 +5,7 @@
         button.btn.btn-block(:class="user.color")
           h4 {{ user.name }}
 
-        PointPanel(
+        MiniPanel(
           :user="user",
           :userKey="userKey",
           :valueKey="valueKey"
@@ -46,10 +46,11 @@ import AddBtn from './AddBtn'
 import SubBtn from './SubBtn'
 import SetBtn from './SetBtn'
 import PointPanel from './PointPanel'
+import MiniPanel from './MiniPanel'
 
 export default {
   name: 'calc',
-  components: { NumBtn, ClrBtn, AddBtn, SubBtn, SetBtn, PointPanel },
+  components: { NumBtn, ClrBtn, AddBtn, SubBtn, SetBtn, PointPanel, MiniPanel },
   computed: mapGetters(['edit', 'user', 'userKey', 'valueKey'])
 }
 </script>

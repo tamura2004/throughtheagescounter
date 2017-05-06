@@ -39,10 +39,22 @@ const state = {
   },
   scores: [],
   valueNames: {
+    vp: '勝利点',
     sp: '科学ポイント',
     sd: '科学増加',
     cp: '文明ポイント',
-    cd: '文明増加'
+    cd: '文明増加',
+    fp: '食糧生産',
+    rp: '資源算出',
+    mi: '軍事力',
+    co: '植民地',
+    hp: '幸福点',
+    t1: '時代I技術',
+    t2: '時代II技術',
+    p1: '時代I政体',
+    p2: '時代II政体',
+    w1: '時代I驚異',
+    w2: '時代II驚異'
   },
   logs: []
 }
@@ -137,7 +149,10 @@ const getters = {
   user: state => state.score.users[state.edit.userKey],
   userKey: state => state.edit.userKey,
   valueKey: state => state.edit.valueKey,
-  logs: state => state.logs
+  logs: state => state.logs,
+  vp: (state, getters) => (user) => {
+    return (user.values.sp + user.values.cp + user.values.mi + user.values.hp + user.values.fp + user.values.rp + user.values.t1 + user.values.t2 * 2 + user.values.p1 * 2 + user.values.p2 * 4 + user.values.co * 3 + user.values.w2 * 6)
+  }
 }
 
 const mutations = {

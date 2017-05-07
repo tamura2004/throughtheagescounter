@@ -12,6 +12,7 @@ import {
   SET_VALUE,
   INC_VALUE,
   CLEAR_NUMBER,
+  NOP,
   EDIT_NUMBER,
   EDIT_USER,
   SET_USER_NAME,
@@ -41,21 +42,21 @@ const state = {
   scores: [],
   valueNames: {
     vp: '勝<br>利<br>点',
-    sp: '科学<br>点',
-    sd: '科学<br>増加',
-    cp: '文明<br>点',
-    cd: '文明<br>増加',
-    fp: '食糧<br>生産',
-    rp: '資源<br>算出',
-    mi: '軍事<br>力',
-    co: '植民<br>地',
-    hp: '幸福<br>点',
-    t1: '時代I<br>技術',
-    t2: '時代II<br>技術',
-    p1: '時代I<br>政体',
-    p2: '時代II<br>政体',
-    w1: '時代I<br>驚異',
-    w2: '時代II<br>驚異'
+    sp: '科学点',
+    sd: '科+',
+    cp: '文',
+    cd: '文+',
+    fp: '食',
+    rp: '資',
+    mi: '軍',
+    co: '植',
+    hp: '幸',
+    t1: '技I',
+    t2: '技Ⅱ',
+    p1: '政I',
+    p2: '政Ⅱ',
+    w1: '驚I',
+    w2: '驚Ⅱ'
   },
   logs: []
 }
@@ -87,6 +88,10 @@ const actions = {
 
   [CLEAR_NUMBER] ({ commit }) {
     commit(CLEAR_NUMBER)
+  },
+
+  [NOP] ({ commit }) {
+    router.push('/')
   },
 
   [EDIT_NUMBER] ({ commit }, edit) {
@@ -157,7 +162,7 @@ const getters = {
   valueKey: state => state.edit.valueKey,
   logs: state => state.logs,
   vp: (state, getters) => (user) => {
-    return (user.values.sp + user.values.cp + user.values.mi + user.values.hp + user.values.fp + user.values.rp + user.values.t1 + user.values.t2 * 2 + user.values.p1 * 2 + user.values.p2 * 4 + user.values.co * 3 + user.values.w2 * 6)
+    return (user.values.sd + user.values.cp + user.values.mi + user.values.hp + user.values.fp + user.values.rp + user.values.t1 + user.values.t2 * 2 + user.values.p1 * 2 + user.values.p2 * 4 + user.values.co * 3 + user.values.w2 * 6)
   }
 }
 

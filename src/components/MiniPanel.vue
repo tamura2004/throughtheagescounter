@@ -39,13 +39,23 @@ button
   margin-top 8px
 
 p
-  font-size 1rem
+  font-size 1.6rem
   margin-bottom 2px
-
+  font-weight bold
+  color white
+  text-shadow:
+    black 1px 0px 0px,
+    black 0px 1px 0px,
+    black -1px 0px 0px,
+    black 0px -1px 0px;
 h2
   color white
   font-weight bold
   font-family Poppins
   font-size 2rem
-
+  text-shadow:
+    black 1px 0px 0px,
+    black 0px 1px 0px,
+    black -1px 0px 0px,
+    black 0px -1px 0px;
 </style>

@@ -19,7 +19,7 @@
             td: NumBtn(num="7")
             td: NumBtn(num="8")
             td: NumBtn(num="9")
-            td: ClrBtn
+            td: NopBtn
           tr
             td: NumBtn(num="4")
             td: NumBtn(num="5")
@@ -42,7 +42,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import NumBtn from './NumBtn'
-import ClrBtn from './ClrBtn'
+import NopBtn from './NopBtn'
 import AddBtn from './AddBtn'
 import SubBtn from './SubBtn'
 import IncBtn from './IncBtn'
@@ -51,7 +51,7 @@ import MiniPanel from './MiniPanel'
 
 export default {
   name: 'calc',
-  components: { NumBtn, ClrBtn, AddBtn, SubBtn, IncBtn, PointPanel, MiniPanel },
+  components: { NumBtn, NopBtn, AddBtn, SubBtn, IncBtn, PointPanel, MiniPanel },
   computed: mapGetters(['edit', 'user', 'userKey', 'valueKey'])
 }
 </script>

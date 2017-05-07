@@ -20,4 +20,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
+h4
+  font-weight bold
+  text-shadow:
+    black 1px 0px 0px,
+    black 0px 1px 0px,
+    black -1px 0px 0px,
+    black 0px -1px 0px;
 </style>

@@ -15,9 +15,12 @@
         :userKey="userKey",
         valueKey="vp"
       )
+      
+      MiniPanel(:user="user", :userKey="userKey", valueKey="sp")
+
       .row
-        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="sp")
         .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="sd")
+        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="hp")
 
       .row
         .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="cp")
@@ -31,8 +34,6 @@
         .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="mi")
         .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="co")
 
-      .row
-        .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="hp")
 
       .row
         .col-6: MiniPanel(:user="user", :userKey="userKey", valueKey="t1")
